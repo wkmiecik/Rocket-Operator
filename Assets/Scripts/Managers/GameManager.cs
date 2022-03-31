@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         if (SceneToLoad == "Menu") SceneManager.LoadScene(SceneToLoad);
-        if (PlayerPrefs.GetInt(SceneToLoad) >= 1) 
+        if (PlayerPrefs.GetInt(SceneToLoad) >= 1 || SceneToLoad == "Level1") 
         {
             Pause();
             SceneManager.LoadScene(SceneToLoad);
