@@ -1467,6 +1467,11 @@ PrefabInstance:
       propertyPath: m_VerticalAlignment
       value: 4096
       objectReference: {fileID: 0}
+    - target: {fileID: 114398244388679912, guid: 1e7ff180e1d4032449076d96f21690fa,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114399858320651446, guid: 1e7ff180e1d4032449076d96f21690fa,
         type: 3}
       propertyPath: m_Type
@@ -1529,6 +1534,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VerticalAlignment
       value: 4096
+      objectReference: {fileID: 0}
+    - target: {fileID: 114455064990645994, guid: 1e7ff180e1d4032449076d96f21690fa,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114677624323542900, guid: 1e7ff180e1d4032449076d96f21690fa,
         type: 3}

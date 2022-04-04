@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa06092e0908a84585e814e7c214a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxArrayCount: 3330
+  m_MaxArrayCount: 65536
   m_PosArray:
   - {x: -7.864513, y: -3.1076245, z: 0}
   - {x: -8.065607, y: -3.114397, z: 0}
