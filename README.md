@@ -6,6 +6,6 @@
  
 Casual game for android. Your goal is to steer the rocket through level to complete it as fast as possible.
 
-Used Zenject for dependency injection.
+Used Zenject for dependency injection and DOTween for simple transitions/animations.
 
 [Google play link](https://play.google.com/store/apps/details?id=com.Chasam33.RocketOperator)
