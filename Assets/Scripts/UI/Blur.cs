@@ -7,22 +7,11 @@ public class Blur : MonoBehaviour
 {
     public bool blurEnabled = false;
 
-    /// Blur iterations - larger number means more blur.
     [Range(0, 10)]
     public int iterations = 3;
 
-    /// Blur spread for each iteration. Lower values
-    /// give better looking blur, but require more iterations to
-    /// get large blurs. Value is usually between 0.5 and 1.0.
     [Range(0.0f, 1.0f)]
     public float blurSpread = 0.6f;
-
-
-    // --------------------------------------------------------
-    // The blur iteration shader.
-    // Basically it just takes 4 texture samples and averages them.
-    // By applying it repeatedly and spreading out sample locations
-    // we get a Gaussian blur approximation.
 
     public Shader blurShader = null;
 
@@ -52,7 +41,6 @@ public class Blur : MonoBehaviour
         }
     }
 
-    // --------------------------------------------------------
 
     protected void Start()
     {
@@ -83,7 +71,6 @@ public class Blur : MonoBehaviour
         blurOutSequence.SetEase(Ease.Linear);
         blurOutSequence.Append(DOTween.To(() => iterations, x => iterations = x, 0, .2f));
         blurOutSequence.Insert(0, DOTween.To(() => blurSpread, x => blurSpread = x, 0f, .1f));
-        //blurOutSequence.OnComplete(() => blurEnabled = false);
         blurOutSequence.OnComplete(() => enabled = false);
     }
 
@@ -96,7 +83,7 @@ public class Blur : MonoBehaviour
                                 new Vector2(-off, off),
                                 new Vector2(off, off),
                                 new Vector2(off, -off)
-            );
+        );
     }
 
     // Downsamples the texture to a quarter resolution.
@@ -108,7 +95,7 @@ public class Blur : MonoBehaviour
                                 new Vector2(-off, off),
                                 new Vector2(off, off),
                                 new Vector2(off, -off)
-            );
+        );
     }
 
     // Called by the camera to apply the image effect

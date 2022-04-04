@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
     void Start()
     {
+        // This is set to make sure FPS won't be limited to 30 on some devices
+        // Instead it will be locked to screen refresh rate
         Application.targetFrameRate = 1000;
     }
 
@@ -20,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     public static void LoadScene(string SceneToLoad) 
     {
-        Time.timeScale = 1;
+        Resume();
         if (SceneToLoad == "Menu") SceneManager.LoadScene(SceneToLoad);
         if (PlayerPrefs.GetInt(SceneToLoad) >= 1 || SceneToLoad == "Level1") 
         {

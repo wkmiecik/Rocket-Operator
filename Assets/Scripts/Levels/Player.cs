@@ -89,6 +89,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Steer the rocket according to input
         if (inputManager.upPressed) 
         {
             rb.AddForce(accelerationForce * transform.up);
@@ -101,17 +102,22 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        float speed = collision.relativeVelocity.magnitude;
+        float collisionSpeed = collision.relativeVelocity.magnitude;
 
-        if (speed > crashSpeedLimit)
+        // If collided anywhere because of too much speed, crash
+        if (collisionSpeed > crashSpeedLimit)
         {
             crashed = true;
-            guiManager.SetSpeedIndicator(speed, crashSpeedLimit);
+            guiManager.SetSpeedIndicator(collisionSpeed, crashSpeedLimit);
         }
+
+        // If collided with anything other than platforms, crash
         if (!collision.gameObject.CompareTag(landPlatformTag) && !collision.gameObject.CompareTag(startPlatformTag))
         {
             crashed = true;
         }
+
+        // If collided with landing platform and speed was OK, set landed indicator
         if (collision.gameObject.CompareTag(landPlatformTag))
         {
             onLandingPlatform = true;

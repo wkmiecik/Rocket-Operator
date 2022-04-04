@@ -9,16 +9,9 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour 
 {
-
-    private bool _upPressed;
-    public bool upPressed { get => _upPressed; }
-
-    private bool _leftPressed;
-    public bool leftPressed { get => _leftPressed; }
-
-    private bool _rightPressed;
-    public bool rightPressed { get => _rightPressed; }
-
+    public bool upPressed { get; private set; }
+    public bool leftPressed { get; private set; }
+    public bool rightPressed { get; private set; }
 
     private const string upTag = "UpButton";
     private const string leftTag = "LeftButton";
@@ -30,20 +23,19 @@ public class InputManager : MonoBehaviour
         EnhancedTouchSupport.Enable();
     }
 
-
     private void Update() 
     {
-        // Reset input
-        _leftPressed = false;
-        _rightPressed = false;
-        _upPressed = false;
+        // Reset input variables
+        upPressed = false;
+        leftPressed = false;
+        rightPressed = false;
 
 
         #if UNITY_EDITOR
         // WASD INPUT
-        if (Keyboard.current.wKey.isPressed) _upPressed = true;
-        if (Keyboard.current.aKey.isPressed) _leftPressed = true;
-        if (Keyboard.current.dKey.isPressed) _rightPressed = true;
+        if (Keyboard.current.wKey.isPressed) upPressed = true;
+        if (Keyboard.current.aKey.isPressed) leftPressed = true;
+        if (Keyboard.current.dKey.isPressed) rightPressed = true;
         #endif
 
 
@@ -55,9 +47,9 @@ public class InputManager : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(worldCoords, Vector2.zero);
 
             if (hit.collider) {
-                if (hit.collider.gameObject.CompareTag(upTag)) _upPressed = true;
-                if (hit.collider.gameObject.CompareTag(leftTag)) _leftPressed = true;
-                if (hit.collider.gameObject.CompareTag(rightTag)) _rightPressed = true;
+                if (hit.collider.gameObject.CompareTag(upTag)) upPressed = true;
+                if (hit.collider.gameObject.CompareTag(leftTag)) leftPressed = true;
+                if (hit.collider.gameObject.CompareTag(rightTag)) rightPressed = true;
             }
         }
     }

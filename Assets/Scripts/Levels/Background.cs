@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+// This fades between diffrent background images to make it more dynamic
+
 public class Background : MonoBehaviour
 {
     Image[] backgrounds;

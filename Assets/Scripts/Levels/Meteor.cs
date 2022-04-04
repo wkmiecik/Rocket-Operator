@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+// This manages newly spawned meteor
+
 public class Meteor : MonoBehaviour {
     public float Speed;
     public float HorizontalSpeedVariation;

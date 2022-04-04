@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa06092e0908a84585e814e7c214a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxArrayCount: 2901
+  m_MaxArrayCount: 65536
   m_PosArray:
   - {x: -8.480821, y: -2.9395404, z: 0}
   - {x: -8.563212, y: -2.8688228, z: 0}
@@ -6014,44 +6014,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 632208176069920162, guid: 178e548e8a4b5ff45a00267e639c1466,
-        type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 632208176069920162, guid: 178e548e8a4b5ff45a00267e639c1466,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d5422c53b44390941a3a0cad841edee7,
-        type: 3}
-    - target: {fileID: 633631452592538848, guid: 178e548e8a4b5ff45a00267e639c1466,
-        type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 633631452592538848, guid: 178e548e8a4b5ff45a00267e639c1466,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d5422c53b44390941a3a0cad841edee7,
-        type: 3}
-    - target: {fileID: 633826349156782218, guid: 178e548e8a4b5ff45a00267e639c1466,
-        type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 633826349156782218, guid: 178e548e8a4b5ff45a00267e639c1466,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d5422c53b44390941a3a0cad841edee7,
-        type: 3}
-    - target: {fileID: 3817519095929304871, guid: 178e548e8a4b5ff45a00267e639c1466,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3818592807525275450, guid: 178e548e8a4b5ff45a00267e639c1466,
         type: 3}
       propertyPath: m_Name

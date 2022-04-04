@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+// This manages spawning of meteors on level
+
 public class MeteorsDrop : MonoBehaviour
 {
     public GameObject Meteor;
