@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelsProperties
   m_EditorClassIdentifier: 
   levels:
-  - goldTimeLimit: 14
+  - goldTimeLimit: 15
     icon: {fileID: 21300000, guid: 749c0300c6f195f479f4260d79d2073d, type: 3}
   - goldTimeLimit: 16
     icon: {fileID: 21300000, guid: 9772c81461b9cb04c86d942f6381d87e, type: 3}
