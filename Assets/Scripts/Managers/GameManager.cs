@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // This is set to make sure FPS won't be limited to 30 on some devices
-        // Instead it will be locked to screen refresh rate
+        // Instead it will be locked to screen refresh rate (i think)
         Application.targetFrameRate = 1000;
     }
 
@@ -40,13 +40,29 @@ public class GameManager : MonoBehaviour
     public static void LoadLastLevel() 
     {
         Pause();
-        SceneManager.LoadScene(PlayerPrefs.GetString("LastUnlocked", "Level1"));
+        if (PlayerPrefs.GetString("LastUnlocked") == "Completed")
+        {
+            SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
+        } 
+        else
+        {
+            SceneManager.LoadScene(PlayerPrefs.GetString("LastUnlocked", "Level1"));
+        }
     }
 
     public static void LoadNextLevel() 
     {
         Pause();
-        SceneManager.LoadScene("Level" + (SceneManager.GetActiveScene().buildIndex + 1));
+
+        // If last level was completed
+        if (SceneManager.sceneCountInBuildSettings == SceneManager.GetActiveScene().buildIndex + 2)
+        {
+            SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
+        } 
+        else
+        {
+            SceneManager.LoadScene("Level" + (SceneManager.GetActiveScene().buildIndex + 1));
+        }
     }
 
     public static void Exit()

@@ -55,11 +55,18 @@ public class LevelManager : MonoBehaviour
             SetLevelLockState(GetCurrentLevel(), LevelLockState.Unlocked);
         }
 
-        // Unlock next level if not yet unlocked
+        // Unlock next level if not yet unlocked or set completed if last level finished
         if (PlayerPrefs.GetInt("Level" + (GetCurrentLevel() + 1), 0) == 0)
         {
             SetLevelLockState(GetCurrentLevel() + 1, LevelLockState.Unlocked);
-            PlayerPrefs.SetString("LastUnlocked", "Level" + (GetCurrentLevel() + 1));
+            if (GetCurrentLevel() + 2 == SceneManager.sceneCountInBuildSettings)
+            {
+                PlayerPrefs.SetString("LastUnlocked", "Completed");
+            } 
+            else
+            {
+                PlayerPrefs.SetString("LastUnlocked", "Level" + (GetCurrentLevel() + 1));
+            }
         }
     }
 }
