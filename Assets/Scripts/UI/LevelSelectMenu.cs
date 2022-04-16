@@ -20,10 +20,10 @@ public class LevelSelectMenu : MonoBehaviour
     private LevelManager levelManager;
 
 
-    private void Start()
+    private void OnEnable()
     {
         levelCount = levelManager.levels.Length;
-        pagesCount = Mathf.CeilToInt( levelCount / 8f );
+        pagesCount = Mathf.CeilToInt(levelCount / 8f);
         currentPage = 1;
 
         SelectLevelLoad();

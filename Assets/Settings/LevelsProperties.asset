@@ -31,3 +31,9 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 52501a588d9ad8a46a39f1494302613a, type: 3}
   - goldTimeLimit: 26
     icon: {fileID: 21300000, guid: 0b960e8e30589334dad7b0c6737efde3, type: 3}
+  - goldTimeLimit: 14
+    icon: {fileID: 21300000, guid: de27116c6af97ec439dcab17e241a6f1, type: 3}
+  - goldTimeLimit: 21
+    icon: {fileID: 21300000, guid: 47abd924c9626a44093a027503085ae5, type: 3}
+  - goldTimeLimit: 17
+    icon: {fileID: 21300000, guid: 888400c8ef8ecee44b188f77c7c9dfb7, type: 3}
