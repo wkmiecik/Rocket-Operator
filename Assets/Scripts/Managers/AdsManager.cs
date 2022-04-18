@@ -1,73 +1,110 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Advertisements;
+using Unity.Services.Core;
+using Unity.Services.Mediation;
+using System;
 
-public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
+public class AdsManager : MonoBehaviour
 {
-    [SerializeField] string androidGameId;
-    [SerializeField] string interstitialAdId = "Android_Interstitial";
-    [SerializeField] bool _testMode = true;
+    IInterstitialAd ad;
+    string adUnitId = "Android_Interstitial";
+    string gameId = "1477947";
 
-    void Start()
+    private void Start()
     {
-        InitializeAds();
+        InitServices();
     }
 
-    // Init
-    public void InitializeAds()
+    public async void InitServices()
     {
-        Advertisement.Initialize(androidGameId, _testMode, this);
+        try
+        {
+            InitializationOptions initializationOptions = new InitializationOptions();
+            initializationOptions.SetGameId(gameId);
+            await UnityServices.InitializeAsync(initializationOptions);
+
+            InitializationComplete();
+        }
+        catch (Exception e)
+        {
+            InitializationFailed(e);
+        }
     }
 
-    public void OnInitializationComplete()
+    public void SetupAd()
     {
-        //Debug.Log("Unity Ads initialization complete.");
-        LoadAd();
+        //Create
+        ad = MediationService.Instance.CreateInterstitialAd(adUnitId);
+
+        //Subscribe to events
+        ad.OnLoaded += AdLoaded;
+        ad.OnFailedLoad += AdFailedLoad;
+
+        ad.OnShowed += AdShown;
+        ad.OnFailedShow += AdFailedShow;
+        ad.OnClosed += AdClosed;
+        ad.OnClicked += AdClicked;
+
+        // Impression Event
+        MediationService.Instance.ImpressionEventPublisher.OnImpression += ImpressionEvent;
     }
 
-    public void OnInitializationFailed(UnityAdsInitializationError error, string message)
-    {
-        //Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
-    }
-
-
-    // Showing Ad
-    // Load content to the Ad Unit:
-    public void LoadAd()
-    {
-        // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
-        //Debug.Log("Loading Ad: " + interstitialAdId);
-        Advertisement.Load(interstitialAdId, this);
-    }
-
-    // Show the loaded content in the Ad Unit:
     public void ShowAd()
     {
-        // Note that if the ad content wasn't previously loaded, this method will fail
-        //Debug.Log("Showing Ad: " + interstitialAdId);
-        Advertisement.Show(interstitialAdId, this);
+        if (UnityServices.State == ServicesInitializationState.Initialized && ad.AdState == AdState.Loaded)
+        {
+            ad.Show();
+        }
     }
 
-    // Implement Load Listener and Show Listener interface methods: 
-    public void OnUnityAdsAdLoaded(string adUnitId)
+    void InitializationComplete()
     {
-        // Optionally execute code if the Ad Unit successfully loads content.
+        SetupAd();
+        ad.Load();
     }
 
-    public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
+    void InitializationFailed(Exception e)
     {
-        //Debug.Log($"Error loading Ad Unit: {adUnitId} - {error.ToString()} - {message}");
-        // Optionally execute code if the Ad Unit fails to load, such as attempting to try again.
+        Debug.Log("Initialization Failed: " + e.Message);
     }
 
-    public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
+    void AdLoaded(object sender, EventArgs args)
     {
-        Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
-        // Optionally execute code if the Ad Unit fails to show, such as loading another ad.
+        Debug.Log("Ad loaded");
     }
 
-    public void OnUnityAdsShowStart(string adUnitId) { }
-    public void OnUnityAdsShowClick(string adUnitId) { }
-    public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState) { }
+    void AdFailedLoad(object sender, LoadErrorEventArgs args)
+    {
+        Debug.Log("Failed to load ad");
+        Debug.Log(args.Message);
+    }
+
+    void AdShown(object sender, EventArgs args)
+    {
+        Debug.Log("Ad shown!");
+    }
+
+    void AdClosed(object sender, EventArgs e)
+    {
+        // Pre-load the next ad
+        ad.Load();
+        Debug.Log("Ad has closed");
+        // Execute logic after an ad has been closed.
+    }
+
+    void AdClicked(object sender, EventArgs e)
+    {
+        Debug.Log("Ad has been clicked");
+        // Execute logic after an ad has been clicked.
+    }
+
+    void AdFailedShow(object sender, ShowErrorEventArgs args)
+    {
+        Debug.Log(args.Message);
+    }
+
+    void ImpressionEvent(object sender, ImpressionEventArgs args)
+    {
+        var impressionData = args.ImpressionData != null ? JsonUtility.ToJson(args.ImpressionData, true) : "null";
+        Debug.Log("Impression event from ad unit id " + args.AdUnitId + " " + impressionData);
+    }
 }
